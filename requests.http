@@ -1,0 +1,63 @@
+### Get all users (with token)
+GET http://localhost:5011/api/users
+Accept: application/json
+Authorization: Bearer yourSecretKey
+
+###
+
+### Get user by ID (valid token, existing user)
+GET http://localhost:5011/api/users/3
+Accept: application/json
+Authorization: Bearer yourSecurityKey
+
+###
+
+### Get user by ID (invalid token)
+GET http://localhost:5011/api/users/3
+Accept: application/json
+Authorization: Bearer INVALID_TOKEN
+
+###
+
+### Create a new user (missing field to test error handling)
+POST http://localhost:5011/api/users/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ5b3VySXNzdWVyIiwiYXVkIjoieW91ckF1ZGllbmNlIiwic3ViIjoidXNlcjEyMyIsImV4cCI6MTg5MzQ1NjAwMH0.q9KluBAlAWUtZpNKNqkjL7Yd_gJ-E0J_iizSa_43ZHo
+
+{
+  "fullName": "",
+  "email": "bademail",
+  "department": "Engineering"
+}
+
+###
+
+### Create a new user (valid)
+POST http://localhost:5011/api/users/
+Content-Type: application/json
+Authorization: Bearer yourSecretKey
+
+{
+  "fullName": "John Duck",
+  "email": "john.duck@mwd.com",
+  "department": "Engineering"
+}
+
+###
+
+### Update user by ID (valid token)
+PUT http://localhost:5011/api/users/3
+Content-Type: application/json
+Authorization: Bearer yourSecretKey
+
+{
+  "fullName": "Jane D. Doe",
+  "email": "jane.d.doe@wtf.com",
+  "department": "Human Resources"
+}
+
+###
+
+### Delete user by ID (unauthorized attempt)
+DELETE http://localhost:5011/api/users/3
+Authorization: Bearer INVALID_TOKEN
